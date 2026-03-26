@@ -31,7 +31,7 @@ variable "ingress_rules" {
       description = "Allowing HTTP access from internet"
     },
 
-    Port = {
+    eight = {
       from_port   = 8080
       to_port     = 8080
       protocol    = "tcp"
