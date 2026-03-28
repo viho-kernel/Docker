@@ -2,8 +2,7 @@
 FROM python:3.12-alpine
 
 # OCI Labels
-LABEL org.opencontainers.image.authors="Kalyan Reddy Daida"
-LABEL org.opencontainers.image.title="Demo: ARG vs ENV in Docker"
+LABEL org.opencontainers.image.authors="Vihari Sai"
 LABEL org.opencontainers.image.description="A Dockerfile demo illustrating the difference between ARG (build-time) and ENV (runtime) instructions"
 LABEL org.opencontainers.image.version="1.0"
 
