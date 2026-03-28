@@ -29,6 +29,14 @@ variable "ingress_rules" {
       protocol    = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
       description = "Allowing HTTP access from internet"
+    },
+
+    all = {
+      from_port   = 0
+      to_port     = 65535
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+      description = "ALL Traffic allowing just for testing purpose."
     }
   }
 
