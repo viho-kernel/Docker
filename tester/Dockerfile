@@ -23,6 +23,7 @@ COPY index.html /usr/share/nginx/html/index.html
 COPY error.html /usr/share/nginx/html/app1
 COPY error.html /usr/share/nginx/html/app2
 
-COPY nginx.conf /etc/nginx/nginx.conf 
+COPY nginx.conf /etc/nginx/conf.d/custom.conf
+
 
 EXPOSE ${NGINX_PORT1} ${NGINX_PORT2} ${NGINX_PORT3}
