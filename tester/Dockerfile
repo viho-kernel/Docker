@@ -1,4 +1,4 @@
-FROM nginx:slim
+FROM nginx:alpine-slim
 
 ENV NGINX_PORT1=8080
 ENV NGINX_PORT2=8081
@@ -8,7 +8,7 @@ LABEL nginx_port1=${NGINX_PORT1}
 LABEL nginx_port2=${NGINX_PORT2}
 LABEL nginx_port3=${NGINX_PORT3}
 
-RUN apt-get update && apt-get install -y curl
+RUN apk add --no-cache curl
 
 RUN curl --version
 
