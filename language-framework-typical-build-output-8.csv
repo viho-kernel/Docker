@@ -1,0 +1,9 @@
+﻿Language / Framework,Typical Build Output,Runtime Entry,Dependency Folder,Notes
+NodeJS (JavaScript),dist/ (if TS/Webpack),server.js or app.js,node_modules/,node_modules is created by npm install. dist only if you compile.
+Python (Flask/Django),__pycache__/ (compiled .pyc files),app.py / manage.py,venv/ or site-packages/,Virtualenv holds dependencies. No dist unless packaging.
+Java (Spring Boot),target/ (Maven) or build/libs/ (Gradle),.jar file,.m2/ (Maven repo),You run java -jar app.jar.
+Go,Compiled binary (./app),Binary itself,go.mod + go.sum,"No node_modules style folder, dependencies vendored or cached in $GOPATH."
+Rust,target/,Compiled binary,Cargo.lock + crates in cache,Build artifacts in target/.
+C# (.NET),bin/ + obj/,.dll or .exe,NuGet packages,Run with dotnet app.dll.
+PHP (Laravel),vendor/,index.php,vendor/,Dependencies installed via Composer.
+Frontend (React/Angular/Vue),dist/ or build/,index.html + JS bundle,node_modules/,Always compiled into static assets.
