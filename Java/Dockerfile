@@ -1,9 +1,11 @@
-FROM openjdk:17-slim 
+FROM openjdk:17-slim
 
 WORKDIR /app
 
 COPY App.java .
 
-RUN javac App.java 
+# Compile Java file
+RUN javac App.java
 
-CMD [ "java", "App" ]
+# Run compiled class
+CMD ["java", "App"]
