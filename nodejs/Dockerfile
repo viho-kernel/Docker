@@ -1,9 +1,9 @@
-FROM node:20-alpine
+FROM node:20-slim
 
 WORKDIR /app
 
 #Copt package.json for cache optimization
-#COPY package*.json ./
+COPY package*.json ./
 
 #Instasll necessary dependences
 RUN npm install
