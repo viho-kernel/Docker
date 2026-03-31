@@ -3,7 +3,7 @@ FROM node:18
 WORKDIR /app
 
 #Copt package.json for cache optimization
-COPY package*.json ./
+#COPY package*.json ./
 
 #Instasll necessary dependences
 RUN npm install
