@@ -1,19 +1,12 @@
-FROM ubuntu:latest AS build
-
+# Build stage with Maven
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-COPY . /app
-
-RUN apt-get update && apt-get install -y maven openjdk-17-jdk && rm -rf /var/lib/apt/lists/*
-
-RUN mvn clean package
-
-FROM eclipse-temurin:17-jre-alpine
-
+# Run stage with distroless
+FROM gcr.io/distroless/java17
 WORKDIR /app
-
 COPY --from=build /app/target/*.jar app.jar
-
 EXPOSE 8080
-
-CMD [ "java", "-jar", "app.jar" ]
+CMD ["app.jar"]
