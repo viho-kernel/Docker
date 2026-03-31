@@ -6,7 +6,8 @@ WORKDIR /app
 COPY package*.json ./
 
 #Instasll necessary dependences
-RUN npm install 
+RUN npm install
+
 
 #copt everything to the /app directory including the application file
 COPY . .
