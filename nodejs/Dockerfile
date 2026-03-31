@@ -3,7 +3,7 @@ FROM node:18
 WORKDIR /app
 
 #Copt package.json for cache optimization
-#COPY package*.json ./
+COPY *.json ./
 
 #Instasll necessary dependences
 RUN npm install
@@ -16,4 +16,4 @@ EXPOSE 3000
 
 #RUNNING APP SERVER
 
-CMD [ "node", "app.js" ]
+CMD ["node", "app.js"]
