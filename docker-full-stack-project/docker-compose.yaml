@@ -1,0 +1,101 @@
+version: '3.9'
+services: 
+  
+  postgres:
+    image: postgres:16-alpine
+    container_name: taskapp_db
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres123}
+      POSTGRES_DB: ${DB_NAME:-taskdb}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - custom_bridge
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  
+  redis:
+    image: redis:7-alpine
+    container_name: taskapp_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - custom_bridge
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
+  backend:
+      build: ./backend
+      image: viharireddy18/backend:1.0.0
+      container_name: backend
+      depends_on:
+        - postgres
+        - redis
+      volumes:
+        - db-data:/var/lib/backup/backend
+      ports:
+        - "5000:5000"
+      networks:
+        - custom_bridge
+      env_file: 
+        - ./.env
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+        interval: 10s
+        timeout: 10s
+        retries: 4
+  frontend:
+      build: ./frontend
+      image: viharireddy18/frontend:1.0.0
+      container_name: frontend
+      volumes:
+        - db-data:/var/lib/backup/backend
+      ports:
+        - 3000:3000
+      networks:
+        - custom_bridge
+      env_file:
+        - ./.env
+      depends_on:
+        - backend
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+        interval: 10s
+        timeout: 10s
+        retries: 4
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - backend
+      - frontend
+    networks:
+        - custom_bridge
+    
+networks:
+  default:
+    driver: bridge
+    name: custom_bridge
+    external: false
+
+volumes:
+  db-data:
+    driver: local
