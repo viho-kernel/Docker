@@ -10,10 +10,11 @@ COPY . .
 
 RUN npm run build
 
-FROM nginx:alpine
+FROM node:18-alpine
 
 WORKDIR /app
 
+RUN npm install -g serve
 
 COPY --from=builder /app/build ./build
 

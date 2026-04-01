@@ -8,7 +8,7 @@ RUN npm ci
 
 COPY  . .
 
-FROM gcr.io/distroless/nodejs22-debian13 
+FROM node:18-alpine
 
 WORKDIR /app
 
@@ -20,4 +20,4 @@ USER nonroot
 
 EXPOSE 5000
 
-CMD [ "server.js" ]
+CMD ["node", "server.js"]
