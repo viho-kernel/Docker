@@ -55,7 +55,9 @@ services:
         timeout: 10s
         retries: 4
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     image: viharireddy18/frontend:1.0.0
     container_name: frontend
     volumes:
