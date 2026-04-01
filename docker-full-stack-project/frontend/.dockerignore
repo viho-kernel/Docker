@@ -4,11 +4,8 @@ build
 .git
 .gitignore
 README.md
-.env
-.env.local
 .DS_Store
 coverage
 .vscode
 .idea
 *.log
-src
