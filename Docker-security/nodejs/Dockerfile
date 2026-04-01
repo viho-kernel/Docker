@@ -1,15 +1,15 @@
 FROM node:latest AS Builder
 
-RUN groupadd -r nonroot && useradd -r -g nonroot nonroot
+#RUN groupadd -r nonroot && useradd -r -g nonroot nonroot
 WORKDIR /app
 COPY package*.json .
 RUN npm install
 
 COPY *.js .
 
-USER nonroot
+@USER nonroot
 
-FROM node:25-slim
+FROM gcr.io/distroless/nodejs22-debian13
 
 WORKDIR /app
 
