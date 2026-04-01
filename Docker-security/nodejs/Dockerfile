@@ -7,7 +7,7 @@ RUN npm install
 
 COPY *.js .
 
-@USER nonroot
+#USER nonroot
 
 FROM gcr.io/distroless/nodejs22-debian13
 
