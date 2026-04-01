@@ -9,7 +9,7 @@ COPY *.js .
 
 USER nonroot
 
-FROM node:latest-slim
+FROM node:25-slim
 
 WORKDIR /app
 
