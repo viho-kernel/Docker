@@ -12,11 +12,11 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-RUN groupadd -r nonroot && useradd -r -g nonroot nonroot
-
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nodejs -u 1001
 COPY --from=builder /app/node_modules ./node_modules
 
-USER nonroot
+USER nodejs
 
 EXPOSE 5000
 
