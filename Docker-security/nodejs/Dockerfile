@@ -14,7 +14,7 @@ FROM node:25-slim
 WORKDIR /app
 
 COPY --from=Builder /app/node_modules ./node_modules
-COPY /app/app.js ./app.js 
+COPY /app/*.js ./app.js 
 
 EXPOSE 3000
 
