@@ -55,24 +55,24 @@ services:
         timeout: 10s
         retries: 4
   frontend:
-      build: ./frontend
-      image: viharireddy18/frontend:1.0.0
-      container_name: frontend
-      volumes:
-        - frontend-data:/var/lib/frontend
-      ports:
-        - 3000:3000
-      networks:
-        - custom_bridge
-      env_file:
-        - ./.env
-      depends_on:
-        - backend
-      healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:3000/"]
-        interval: 10s
-        timeout: 10s
-        retries: 4
+    build: ./frontend
+    image: viharireddy18/frontend:1.0.0
+    container_name: frontend
+    volumes:
+      - frontend-data:/var/lib/frontend
+    ports:
+      - 3000:3000
+    networks:
+      - custom_bridge
+    env_file:
+      - ./.env
+    depends_on:
+      - backend
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+      interval: 10s
+      timeout: 10s
+      retries: 4
 
   nginx:
     image: nginx:latest
@@ -87,13 +87,11 @@ services:
       - backend
       - frontend
     networks:
-        - custom_bridge
-    
+      - custom_bridge
+
 networks:
-  default:
+  custom_bridge:
     driver: bridge
-    name: custom_bridge
-    external: false
 
 volumes:
   postgres-data:
