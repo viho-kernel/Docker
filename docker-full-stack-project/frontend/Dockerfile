@@ -8,6 +8,8 @@ RUN npm install
 
 COPY . .
 
+RUN npm run build
+
 FROM node:18-alpine
 
 WORKDIR /app
