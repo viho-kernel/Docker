@@ -11,7 +11,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - custom_bridge
@@ -43,7 +43,7 @@ services:
         - postgres
         - redis
       volumes:
-        - db-data:/var/lib/backup/backend
+        - backend-data:/var/lib/backend
       ports:
         - "5000:5000"
       networks:
@@ -60,7 +60,7 @@ services:
       image: viharireddy18/frontend:1.0.0
       container_name: frontend
       volumes:
-        - db-data:/var/lib/backup/backend
+        - frontend-data:/var/lib/frontend
       ports:
         - 3000:3000
       networks:
@@ -97,5 +97,11 @@ networks:
     external: false
 
 volumes:
+  postgres-data:
+    driver: local
+  backend-data:
+    driver: local
+  frontend-data:
+    driver: local
   db-data:
     driver: local
