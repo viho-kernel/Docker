@@ -7,14 +7,14 @@ RUN npm install
 
 COPY *.js .
 
-USER nonroot
-
 FROM gcr.io/distroless/nodejs22-debian13
 
 WORKDIR /app
 
 COPY --from=Builder /app/node_modules ./node_modules
 COPY --from=Builder /app/*.js ./app.js 
+
+USER nonroot
 
 EXPOSE 3000
 
